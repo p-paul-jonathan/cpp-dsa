@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 
 using namespace std;
 
@@ -6,7 +7,7 @@ template <class T>
 class DynamicArray {
   public:
     DynamicArray(int cap = 1) {
-      if(cap < 1) { cout<<"capacity must be atleast 1\n"; exit(1); }
+      if(cap < 1) { throw invalid_argument("must be greater than 0"); }
 
       capacity = cap;
       array = new T[capacity];
@@ -36,7 +37,7 @@ class DynamicArray {
     int getLength() { return length; }
 
     T getIndex(int index) {
-      if(index >= length) { return NULL; }
+      if(index >= length) { throw invalid_argument("out of range"); }
 
       return array[index];
     }
@@ -89,5 +90,12 @@ int main() {
     }
 
     darr.display();
+
+      cout << "index 5: " << darr.getIndex(5) << "\n";
+    try {
+      cout << "index 50: " << darr.getIndex(50) << "\n";
+    } catch (...) {
+      cout << "error\n";
+    }
     return 0;
 }

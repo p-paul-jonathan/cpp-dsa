@@ -2,15 +2,13 @@
 #include <iostream>
 #include <stdexcept>
 
-template <class T>
-struct Node {
+template <class T> struct Node {
   T data;
   Node *next;
   Node *prev;
 };
 
-template <class T>
-class DoublyLinkedList {
+template <class T> class DoublyLinkedList {
 public:
   DoublyLinkedList() {
     head = nullptr;
@@ -26,13 +24,19 @@ public:
 
     length++;
 
-    if(tail != nullptr) { tail->next = node; }
+    if (tail != nullptr) {
+      tail->next = node;
+    }
     tail = node;
-    if(head == nullptr) { head = node; }
+    if (head == nullptr) {
+      head = node;
+    }
   }
 
   T popBack() {
-    if(length == 0) { throw std::runtime_error("empty"); }
+    if (length == 0) {
+      throw std::runtime_error("empty");
+    }
 
     Node<T> *node = tail;
     T value = node->data;
@@ -42,7 +46,7 @@ public:
     tail = tail->prev;
     node->prev = nullptr;
 
-    if(tail == nullptr) {
+    if (tail == nullptr) {
       head = nullptr;
     } else {
       tail->next = nullptr;
@@ -52,7 +56,7 @@ public:
     return value;
   }
 
-  void push(int value){
+  void push(int value) {
     Node<T> *node = new Node<T>;
     node->data = value;
     node->next = head;
@@ -60,13 +64,19 @@ public:
 
     length++;
 
-    if(head != nullptr) { head->prev = node; }
+    if (head != nullptr) {
+      head->prev = node;
+    }
     head = node;
-    if(tail == nullptr) { tail = node; }
+    if (tail == nullptr) {
+      tail = node;
+    }
   }
 
   T pop() {
-    if(length == 0) { throw std::runtime_error("empty"); }
+    if (length == 0) {
+      throw std::runtime_error("empty");
+    }
 
     Node<T> *node = head;
     T value = node->data;
@@ -76,7 +86,7 @@ public:
     head = head->next;
     node->next = nullptr;
 
-    if(head == nullptr) {
+    if (head == nullptr) {
       tail = nullptr;
     } else {
       head->prev = nullptr;
@@ -87,11 +97,13 @@ public:
   }
 
   T getIndex(int index) {
-    if(index >= length) { throw std::invalid_argument("out of range"); }
+    if (index >= length) {
+      throw std::invalid_argument("out of range");
+    }
 
     Node<T> *itr = head;
 
-    for(int i = 0; i < index; i++) {
+    for (int i = 0; i < index; i++) {
       itr = itr->next;
     }
 
@@ -103,7 +115,7 @@ public:
     std::cout << "{ length: " << length << " } ";
     std::cout << "[ ";
 
-    for(int i = 0; i < length; i++) {
+    for (int i = 0; i < length; i++) {
       std::cout << itr->data << " ";
       itr = itr->next;
     }

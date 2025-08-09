@@ -2,11 +2,12 @@
 
 using namespace std;
 
-template<class T>
-class Stack : public DoublyLinkedList<T> {
+template <class T> class Stack : public DoublyLinkedList<T> {
 public:
   T peek() {
-    if(this->length == 0) { throw runtime_error("empty"); }
+    if (this->length == 0) {
+      throw runtime_error("empty");
+    }
 
     return this->head->data;
   }
@@ -20,7 +21,6 @@ int main() {
   s.push(3);
   s.push(4);
   s.push(5);
-
 
   cout << s.peek() << "\n";
   cout << s.pop() << "\n";

@@ -2,14 +2,12 @@
 #include <iostream>
 #include <stdexcept>
 
-template <class T>
-struct Node {
+template <class T> struct Node {
   T data;
   Node *next;
 };
 
-template <class T>
-class SinglyLinkedList {
+template <class T> class SinglyLinkedList {
 public:
   SinglyLinkedList() {
     head = nullptr;
@@ -24,7 +22,7 @@ public:
 
     length++;
 
-    if(tail == nullptr) {
+    if (tail == nullptr) {
       tail = node;
       head = node;
     } else {
@@ -34,14 +32,18 @@ public:
   }
 
   T popBack() {
-    if(length == 0) { throw std::runtime_error("empty"); }
+    if (length == 0) {
+      throw std::runtime_error("empty");
+    }
 
     Node<T> *itr = head, *node = tail;
     T value = node->data;
 
     length--;
 
-    while(itr->next != tail) { itr = itr->next; }
+    while (itr->next != tail) {
+      itr = itr->next;
+    }
 
     tail = itr;
     itr->next = nullptr;
@@ -58,11 +60,15 @@ public:
     length++;
 
     head = node;
-    if(tail == nullptr) { tail = node; }
+    if (tail == nullptr) {
+      tail = node;
+    }
   }
 
   T pop() {
-    if(length == 0) { throw std::runtime_error("empty"); }
+    if (length == 0) {
+      throw std::runtime_error("empty");
+    }
 
     Node<T> *node = head;
     T value = node->data;
@@ -72,18 +78,22 @@ public:
     head = head->next;
     node->next = nullptr;
 
-    if(head == nullptr) { tail = nullptr; }
+    if (head == nullptr) {
+      tail = nullptr;
+    }
 
     delete node;
     return value;
   }
 
   T getIndex(int index) {
-    if(index >= length) { throw std::invalid_argument("out of range"); }
+    if (index >= length) {
+      throw std::invalid_argument("out of range");
+    }
 
     Node<T> *itr = head;
 
-    for(int i = 0; i < index; i++) {
+    for (int i = 0; i < index; i++) {
       itr = itr->next;
     }
 
@@ -95,7 +105,7 @@ public:
     std::cout << "{ length: " << length << " } ";
     std::cout << "[ ";
 
-    for(int i = 0; i < length; i++) {
+    for (int i = 0; i < length; i++) {
       std::cout << itr->data << " ";
       itr = itr->next;
     }

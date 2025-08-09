@@ -1,22 +1,23 @@
 #include <iostream>
 #include <stdexcept>
 
-template <class T>
-class DynamicArray {
+template <class T> class DynamicArray {
 public:
   DynamicArray(int cap = 1) {
-    if(cap < 1) { throw std::invalid_argument("must be greater than 0"); }
+    if (cap < 1) {
+      throw std::invalid_argument("must be greater than 0");
+    }
 
     capacity = cap;
     array = new T[capacity];
   }
 
-  ~DynamicArray() {
-    delete array;
-  }
+  ~DynamicArray() { delete array; }
 
   void push(int n) {
-    if(length == capacity) { resize(); }
+    if (length == capacity) {
+      resize();
+    }
 
     array[length] = n;
     length++;
@@ -26,24 +27,27 @@ public:
     array[length - 1] = 0;
     length--;
 
-    if(length <= capacity / 2) { resizeDown(); }
+    if (length <= capacity / 2) {
+      resizeDown();
+    }
   }
-
-
 
   int getCapacity() { return capacity; }
   int getLength() { return length; }
 
   T getIndex(int index) {
-    if(index >= length) { throw std::invalid_argument("out of range"); }
+    if (index >= length) {
+      throw std::invalid_argument("out of range");
+    }
 
     return array[index];
   }
 
   void display() {
-    std::cout << "{ capacity: " << getCapacity() << ", length: " << getLength() << " } ";
+    std::cout << "{ capacity: " << getCapacity() << ", length: " << getLength()
+              << " } ";
     std::cout << "[ ";
-    for(int i = 0; i < length; i++) {
+    for (int i = 0; i < length; i++) {
       std::cout << array[i] << " ";
     }
     std::cout << "]\n";
@@ -65,7 +69,7 @@ protected:
   }
 
   void copyArray(T *new_array) {
-    for(int i = 0; i < length; i++) {
+    for (int i = 0; i < length; i++) {
       new_array[i] = array[i];
     }
 

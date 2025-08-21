@@ -14,7 +14,7 @@ public:
 
   ~DynamicArray() { delete array; }
 
-  void push(int n) {
+  void push(T n) {
     if (length == capacity) {
       resize();
     }
@@ -23,13 +23,20 @@ public:
     length++;
   }
 
-  void pop() {
+  T pop() {
+    if (length == 0) {
+      throw std::underflow_error("Array is empty");
+    }
+
+    T last = array[length - 1];
     array[length - 1] = 0;
     length--;
 
     if (length <= capacity / 2) {
       resizeDown();
     }
+
+    return last;
   }
 
   int getCapacity() { return capacity; }

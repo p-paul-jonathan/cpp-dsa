@@ -9,7 +9,7 @@ public:
       throw std::runtime_error("empty");
     }
 
-    return this->array[0];
+    return this->array[this->length - 1];
   }
 };
 
@@ -23,8 +23,7 @@ int main() {
   s.push(5);
 
   cout << s.peek() << "\n";
-
-  s.pop();
+  cout << s.pop() << "\n";
 
   s.push(6);
 

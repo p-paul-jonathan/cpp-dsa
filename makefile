@@ -57,7 +57,7 @@ $(OUTDIR)/%.out: $(SRCDIR)/%.cpp
 run: all
 	@printf "$(BLUE)Running executables...$(RESET)\n"
 	@for bin in $(TARGETS); do \
-		printf "\n=== $(GREEN)Running%s$(RESET) ===\n" "$$bin"; \
+		printf "\n=== $(GREEN)Running %s$(RESET) ===\n" "$$bin"; \
 		"$$bin"; \
 	done
 

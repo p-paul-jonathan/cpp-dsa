@@ -11,7 +11,7 @@ public:
     array = new T[capacity];
   }
 
-  ~Stack() { delete array; }
+  ~Stack() { delete[] array; }
 
   void push(T n) {
     if (top == capacity - 1) {

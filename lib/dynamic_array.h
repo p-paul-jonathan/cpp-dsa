@@ -12,7 +12,7 @@ public:
     array = new T[capacity];
   }
 
-  ~DynamicArray() { delete array; }
+  ~DynamicArray() { delete[] array; }
 
   void push(T n) {
     if (length == capacity) {
@@ -80,7 +80,7 @@ protected:
       new_array[i] = array[i];
     }
 
-    delete array;
+    delete[] array;
     array = new_array;
   }
 };

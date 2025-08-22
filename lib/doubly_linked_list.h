@@ -16,7 +16,7 @@ public:
     length = 0;
   }
 
-  void pushBack(int value) {
+  void pushBack(T value) {
     Node<T> *node = new Node<T>;
     node->data = value;
     node->next = nullptr;
@@ -56,7 +56,7 @@ public:
     return value;
   }
 
-  void push(int value) {
+  void push(T value) {
     Node<T> *node = new Node<T>;
     node->data = value;
     node->next = head;

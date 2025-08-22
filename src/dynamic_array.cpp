@@ -1,7 +1,5 @@
 #include "../lib/dynamic_array.h"
 
-using namespace std;
-
 int main() {
   DynamicArray<char> darr(20);
 
@@ -17,12 +15,12 @@ int main() {
 
   darr.display();
 
-  cout << "index 5: " << darr.getIndex(5) << "\n";
+  std::cout << "index 5: " << darr.getIndex(5) << "\n";
 
   try {
-    cout << "index 50: " << darr.getIndex(50) << "\n";
+    std::cout << "index 50: " << darr.getIndex(50) << "\n";
   } catch (...) {
-    cout << "error\n";
+    std::cout << "error\n";
   }
 
   return 0;

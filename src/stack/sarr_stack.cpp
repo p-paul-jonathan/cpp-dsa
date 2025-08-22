@@ -1,7 +1,5 @@
 #include <iostream>
 
-using namespace std;
-
 template <class T> class Stack {
 public:
   Stack(int cap = 32) {
@@ -75,12 +73,12 @@ int main() {
   s.push(4);
   s.push(5);
 
-  cout << s.peek() << "\n";
-  cout << s.pop() << "\n";
+  std::cout << s.peek() << "\n";
+  std::cout << s.pop() << "\n";
 
   s.push(6);
 
-  cout << s.peek() << "\n";
+  std::cout << s.peek() << "\n";
 
   s.display();
 

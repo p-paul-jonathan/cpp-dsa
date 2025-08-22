@@ -1,7 +1,5 @@
 #include "../lib/doubly_linked_list.h"
 
-using namespace std;
-
 int main() {
   DoublyLinkedList<int> dll;
 
@@ -22,9 +20,9 @@ int main() {
   dll.push(5);
   dll.display();
 
-  cout << "val 1: " << dll.getIndex(1) << "\n";
-  cout << "val 0: " << dll.getIndex(0) << "\n";
-  cout << "val 2: " << dll.getIndex(2) << "\n";
+  std::cout << "val 1: " << dll.getIndex(1) << "\n";
+  std::cout << "val 0: " << dll.getIndex(0) << "\n";
+  std::cout << "val 2: " << dll.getIndex(2) << "\n";
 
   dll.pop();
   dll.display();

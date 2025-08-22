@@ -1,7 +1,5 @@
 #include "../lib/singly_linked_list.h"
 
-using namespace std;
-
 int main() {
   SinglyLinkedList<int> sll;
 
@@ -22,9 +20,9 @@ int main() {
   sll.push(5);
   sll.display();
 
-  cout << "val 1: " << sll.getIndex(1) << "\n";
-  cout << "val 0: " << sll.getIndex(0) << "\n";
-  cout << "val 2: " << sll.getIndex(2) << "\n";
+  std::cout << "val 1: " << sll.getIndex(1) << "\n";
+  std::cout << "val 0: " << sll.getIndex(0) << "\n";
+  std::cout << "val 2: " << sll.getIndex(2) << "\n";
 
   sll.pop();
   sll.display();

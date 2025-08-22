@@ -1,12 +1,10 @@
 #include "../../lib/doubly_linked_list.h"
 
-using namespace std;
-
 template <class T> class Stack : public DoublyLinkedList<T> {
 public:
   T peek() {
     if (this->length == 0) {
-      throw runtime_error("empty");
+      throw std::runtime_error("empty");
     }
 
     return this->head->data;
@@ -22,12 +20,12 @@ int main() {
   s.push(4);
   s.push(5);
 
-  cout << s.peek() << "\n";
-  cout << s.pop() << "\n";
+  std::cout << s.peek() << "\n";
+  std::cout << s.pop() << "\n";
 
   s.push(6);
 
-  cout << s.peek() << "\n";
+  std::cout << s.peek() << "\n";
 
   s.display();
 

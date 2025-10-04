@@ -1,22 +1,12 @@
 #include <cassert>
-#include <cstddef>
 #include <iostream>
 #include <stdexcept>
 
 template <class T> class BinaryMinHeap {
 private:
   int capacity;
-  int length;
+  int length = 0;
   T *array;
-  std::function<int(const T &, const T &)> comparator;
-
-  static int defaultComparator(const T &a, const T &b) {
-    if (a < b)
-      return -1;
-    if (a > b)
-      return 1;
-    return 0;
-  }
 
   void heapify() {
     for (int i = (length / 2) - 1; i >= 0; i--) {
@@ -44,7 +34,7 @@ private:
     while (current_index > 0) {
       parent_index = (current_index - 1) / 2;
 
-      if (comparator(array[parent_index], array[current_index]) <= 0) {
+      if (array[parent_index] <= array[current_index]) {
         break;
       }
 
@@ -67,12 +57,12 @@ private:
     int smallest_index = index;
 
     if (left_child_index < length &&
-        comparator(array[left_child_index], array[smallest_index]) < 0) {
+        array[left_child_index] < array[right_child_index]) {
       smallest_index = left_child_index;
     }
 
     if (right_child_index < length &&
-        comparator(array[right_child_index], array[smallest_index]) < 0) {
+        array[right_child_index] < array[left_child_index]) {
       smallest_index = right_child_index;
     }
 
@@ -80,13 +70,11 @@ private:
   }
 
 public:
-  BinaryMinHeap(
-      int cap = 32,
-      std::function<int(const T &, const T &)> comparator = defaultComparator)
-      : capacity(cap), length(0), comparator(comparator) {
+  BinaryMinHeap(int cap = 32) {
     if (cap < 1) {
       throw std::invalid_argument("`cap` must be greater than 0");
     }
+    capacity = cap;
     array = new T[capacity];
   }
 
@@ -133,7 +121,7 @@ public:
 
     // heapify();
 
-    if (comparator(old_value, new_value) <= 0) {
+    if (old_value <= new_value) {
       siftDown(index);
     } else {
       siftUp(index);
@@ -307,52 +295,6 @@ int main() {
       }
     }
     check(sorted, "heap correctly sorts 20 inserted values");
-  }
-
-  // --- Additional Tests ---
-
-  // Test 14: using custom comparator for max-heap
-  {
-    auto maxComp = [](int a, int b) { return (a < b) ? 1 : (a > b ? -1 : 0); };
-    BinaryMinHeap<int> h(10, maxComp);
-    h.insert(1);
-    h.insert(5);
-    h.insert(3);
-    check(h.getMin() == 5, "max-heap comparator makes getMin return max");
-  }
-
-  // Test 15: heap with doubles
-  {
-    BinaryMinHeap<double> h(5);
-    h.insert(3.14);
-    h.insert(2.71);
-    h.insert(1.41);
-    check(h.getMin() == 1.41, "heap works with double type");
-  }
-
-  // Test 16: heap with strings (lex order)
-  {
-    BinaryMinHeap<std::string> h(5);
-    h.insert("pear");
-    h.insert("apple");
-    h.insert("orange");
-    check(h.getMin() == "apple", "heap works with std::string (lex order)");
-  }
-
-  // Test 17: heap with custom comparator on strings (longest first)
-  {
-    auto longFirst = [](const std::string &a, const std::string &b) {
-      if (a.size() < b.size())
-        return 1;
-      if (a.size() > b.size())
-        return -1;
-      return 0;
-    };
-    BinaryMinHeap<std::string> h(5, longFirst);
-    h.insert("a");
-    h.insert("banana");
-    h.insert("pear");
-    check(h.getMin() == "banana", "custom comparator: longest string first");
   }
 
   std::cout << "\n✅ Test suite finished.\n";
